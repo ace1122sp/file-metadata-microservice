@@ -1,6 +1,3 @@
-# file-metadata-microservice
-freeCodeCamp miscroservice project
-
 
 # API Project: File Metadata Microservice for freeCodeCamp
 
