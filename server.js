@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+const sendMetadata = require('./controller').sendMetadata;
+
 const app = express();
 
 // config 
@@ -19,14 +21,22 @@ app.use(cors());
 app.use(jsonParser);
 app.use(urlencodedParser);
 
-app.use('/public', express.static(PUBLIC));
+app.use(express.static(PUBLIC));
 
 // routes
-app.get('/*', (req, res) => {
-  res.send('helloworld');
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'views', 'index.html'));
 });
+app.get('/*', (req, res) => {
+  res.redirect('/');
+});
+app.post('/api/fileanalyse', sendMetadata);
 
-// app.post('/api/fileanalyse', (req, res) => {});
+// universal error handle
+app.use('/*', (req, res, next, err) => {
+  console.error(err.stack);
+  res.send('Something broke!');
+});
 
 // boot up the app
 app.listen(PORT, () => console.log(`Server listening on ${PORT}...`));

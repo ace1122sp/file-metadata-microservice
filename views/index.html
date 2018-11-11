@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>File Metadata</title>
+</head>
+<body>
+  <main>
+    <h1>API Project: File Metadata Microservice</h1>
+    <h3>A freeCodeCamp API project</h3>
+    <div class="usage-explanation">
+      <h2>Usage: </h2>    
+      <ul>
+        <li>upload a file</li>
+        <li>you will get a JSON object as a response</li>
+        <li>the response will have information about the file name, type and size in bytes</li>
+      </ul>
+    </div>
+    <form method="POST" action="/api/fileanalyse" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Please Upload a File...</legend>
+        <input type="file" name="upfile" />
+        <input type="submit" value="Upload" />
+      </fieldset>
+    </form>
+  </main>
+  <footer>
+    <address>by <a href="https://github.com/ace1122sp">ace11</a></address>
+  </footer>
+</body>
+</html>
