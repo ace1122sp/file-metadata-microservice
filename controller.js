@@ -2,15 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const sendMetadata = (req, res) => {
-  const file = req.body.upfile;
-  // fs.writeFile(path.resolve(__dirname, '../file'), file, /)
-  fs.copyFile(file, path.resolve(__dirname, './file'), err => {
-    if (err) throw err;
-    console.log('file copied');
-    res.sendFile(req.body.upfile);
-  });
-  // console.log(file);
-  // res.send('ok');
+  const files = req.files[0];
+  const response = {
+    name: files.originalname,
+    type: files.mimetype,
+    size: files.size
+  }
+
+  res.send(response);  
 }
 
 module.exports = { sendMetadata };

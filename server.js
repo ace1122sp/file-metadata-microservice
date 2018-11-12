@@ -3,9 +3,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+const multer = require('multer');
 
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const upload = multer({ limits: { fileSize: 5000 } });
 
 const sendMetadata = require('./controller').sendMetadata;
 
@@ -30,13 +32,7 @@ app.get('/', (req, res) => {
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
-app.post('/api/fileanalyse', sendMetadata);
-
-// universal error handle
-app.use('/*', (req, res, next, err) => {
-  console.error(err.stack);
-  res.send('Something broke!');
-});
+app.post('/api/fileanalyse', upload.any(), sendMetadata);
 
 // boot up the app
 app.listen(PORT, () => console.log(`Server listening on ${PORT}...`));
